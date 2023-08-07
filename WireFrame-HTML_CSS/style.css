@@ -1,0 +1,230 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    width: 700px;
+    height: 620px;
+    margin: 0 auto;
+    /* border: 1px solid black; */
+}
+/* Nav bar css styles */
+.nav-main{
+    display: flex;
+    height: 35px;
+}
+.nav-main p{
+    padding: 5px 3px;
+    border: 1px solid black;
+}
+.nav-main input{
+    width: 470px;
+}
+ .btn{
+    width: 70px;
+    padding: 5px;
+    background-color: lightgrey; 
+    font-size: 12px;
+}
+
+/* 2nd part css style */
+.second{
+    display: flex;
+    margin-top: 15px;
+}
+.second-1{
+    width: 495px; /* 30.50rem */
+    height: 200px; /* 12.50rem */
+    border: 1px solid black;
+    overflow-y:scroll;
+}
+.second-1 input[type="radio"]{
+    left: 200px;
+    position: relative;
+    /* text-align:center; */
+}
+.second-11{
+    margin: 2px;
+    width:473px;
+    height: 180px;
+    border: 1px solid black;
+}
+
+.second-2{
+    margin-left: 10px;
+    width:190px;
+    height: 200px;
+    border: 1px solid black;
+    font-size: 12px;
+}
+.second-2-head p{
+    padding: 2px 0 2px 0;
+    background: lightgrey;    
+}
+.second-2-div{
+    text-align: center;
+    overflow-y:scroll;
+}
+.second-2-div-i{
+    margin: 3.5px auto;
+}
+/* .second-2-div input{
+    margin: 0 25px;
+} */
+
+/* third row part css style */
+.third{
+    display: flex;
+}
+.third-1{
+    width:148px;
+    height: 217px;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+.third-1-head{
+    padding: 2px 0 2px 2px;
+    background: lightgrey;
+    font-size: 12px;
+}
+.third-1-div{
+    height: 198px;
+    overflow-y:scroll;
+}
+.third-1-div p{
+    padding: 4px 0 1px 5px;
+    font-size: 11px;
+}
+.third-1-div2{
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    position: relative;
+    top: -100px;
+    left: 100px;
+}
+.third-1-div21{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    background: rgb(133, 133, 226);
+}
+.two, .three, .four, .five, .six{
+    margin-top: -4px;
+}
+
+/* third-2 */
+.third-2{
+    margin-left: 5px;
+    width:344px;
+    height: 220px;
+    margin-top: 10px;
+}
+.third-2-1{
+    border: 1px solid black;
+    padding: 5px 0 0 3px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+.third-2-2{
+    border: 1px solid black;
+    height: 190px;
+    overflow-y:scroll;
+    font-size: 10px;
+}
+.third-2-2 p{
+    padding: 5px 0 0 3px;
+}
+/* .third-2-2 p:first-child{
+    background: lightgrey;
+} */
+.third-2-2 p:hover{
+    background: lightgrey;
+}
+
+/* third-3 */
+.third-3{
+    margin-left: 10px;
+    width:193px;
+    height: 356px;
+    margin-top: 10px;
+    border: 1px solid black;
+
+}
+.third-3-1{
+    padding: 5px 0 0 3px;
+    background: lightgrey;
+    font-size: 12px;
+}
+.third-3-2{
+    overflow-y:scroll;
+    width:190px;
+    height: 330px;
+}
+
+/* fourth row css style */
+.fourth{
+    display: flex;
+    position: relative;
+    top: -125px;
+}
+.fourth-1{
+    width: 148px;
+    height: 124px;
+    /* border: 1px solid black; */
+}
+.fourth-1-1{
+    border: 1px solid black;
+    padding: 5px 0 0 3px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+.fourth-1-21{
+    padding: 5px 0 0 3px;
+    background: lightgrey;
+    font-size: 12px;
+}
+/* fourth 2nd div css style */
+.fourth-2{
+    margin-left: 5px;
+    width: 342px;
+    height: 124px;
+    /* border: 1px solid black; */
+}
+.fourth-1-2, .fourth-2-2{
+    border: 1px solid black;
+    height: 95px;
+}
+.fourth-1-22, .fourth-2-22{ 
+    font-size: 11px;
+    overflow-y:scroll;
+}
+.fourth-1-22p1{
+    font-size: 8px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+}
+.fourth-2-1{
+    border: 1px solid black;
+    padding: 5px 0 0 3px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+.fourth-2-21{
+    padding: 5px 0 0 3px;
+    background: lightgrey;
+    font-size: 12px;
+}
+.fourth-2-221{
+    display: flex;
+}
+.fourth-2-221p{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 15px;
+    height: 14px;
+    text-align: center;
+    margin-left: 3px;
+    background: rgb(133, 133, 226);
+}

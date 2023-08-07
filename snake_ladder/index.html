@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake and Ladder</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="diceStyle.css" />
+    <link rel="stylesheet" href="snakeLadder.css" />
+  </head>
+  <body>
+    <section class="game-frame">
+      <div class="board"></div>
+      <div class="player">
+        <h3 id="player1">
+          Player 1 :
+          <p class="cir" style="background: orange; color: orange">.</p>
+        </h3>
+        <h3 id="player2">
+          Player 2 :
+          <div class="cir" style="background: green; color: green">.</div>
+        </h3>
+        <div id="playerTurn"></div>
+      </div>
+      <!-- -------------------------- Dice Part --------------------------- -->
+      <div class="dice-container">
+        <div id="dice">
+          <div class="side top">
+            <div class="dot one-1"></div>
+          </div>
+          <div class="side bottom">
+            <div class="dot two-1"></div>
+            <div class="dot two-2"></div>
+          </div>
+          <div class="side left">
+            <div class="dot three-1"></div>
+            <div class="dot three-2"></div>
+            <div class="dot three-3"></div>
+          </div>
+          <div class="side right">
+            <div class="dot four-1"></div>
+            <div class="dot four-2"></div>
+            <div class="dot four-3"></div>
+            <div class="dot four-4"></div>
+          </div>
+          <div class="side front">
+            <div class="dot five-1"></div>
+            <div class="dot five-2"></div>
+            <div class="dot five-3"></div>
+            <div class="dot five-4"></div>
+            <div class="dot five-5"></div>
+          </div>
+          <div class="side back">
+            <div class="dot six-1"></div>
+            <div class="dot six-2"></div>
+            <div class="dot six-3"></div>
+            <div class="dot six-4"></div>
+            <div class="dot six-5"></div>
+            <div class="dot six-6"></div>
+          </div>
+        </div>
+        <button id="btn">Roll Dice!</button>
+      </div>
+    </section>
+    <!-- <script src="diceScript.js"></script> -->
+    <script>
+      // Player objects
+      var players = [
+        { id: 1, position: 0, color: "orange", isFirstMove: true },
+        { id: 2, position: 0, color: "green", isFirstMove: true },
+      ];
+
+      function createBoxes() {
+        var boxes = "";
+        var n = 100,
+          inc = -1;
+        for (let i = 0; i < 10; i++) {
+          for (let j = 0; j < 10; j++) {
+            var y = i * 50;
+            var x = j * 50;
+            boxes += `<div class="box" id="b_${n}" style="margin:${y}px ${x}px;"></div>`;
+            n += inc;
+          }
+
+          if (i % 2 == 0) {
+            n -= 9;
+          } else {
+            n -= 11;
+          }
+          inc = -inc;
+        }
+
+        document.querySelector(".board").innerHTML = boxes;
+      }
+
+      function setBox(id, color) {
+        document.getElementById(id).innerHTML = `<div class='cir' style='background:${color}'></div>`;
+      }
+
+      function removeBox(id) {
+        document.getElementById(id).innerHTML = "";
+      }
+
+      createBoxes();
+
+      function playerMover(player, move) {
+        if (move > 0) {
+          setTimeout(() => {
+            if (player.position >= 1) {
+              removeBox("b_" + player.position);
+            }
+            new Audio("music/move.mp3").play();
+            player.position++;
+            setBox("b_" + player.position, player.color);
+            move--;
+            playerMover(player, move);
+            if (move == 0) {
+              check(player, ladders);
+              check(player, snakes);
+              if (player.position == 100) {
+                announceWinner(player);
+              }
+            }
+          }, 1000);
+        } else {
+          var currentPlayer = players[0];
+          players.push(players.shift());
+        }
+      }
+
+      function announceWinner(player) {
+        new Audio("music/winner.mp3").play();
+        document.getElementById("playerTurn").innerHTML = `Player ${player.id} Won the Match `;
+        alert("Player " + player.id + " wins!");
+        window.location.reload();
+      }
+
+      var ladders = {
+        1: 38,
+        4: 14,
+        8: 30,
+        21: 42,
+        28: 76,
+        50: 67,
+        71: 92,
+        80: 99,
+      };
+
+      var snakes = {
+        32: 10,
+        36: 6,
+        48: 26,
+        62: 18,
+        88: 24,
+        95: 56,
+        97: 78
+      };
+
+      var dice = document.getElementById("dice");
+      var button = document.getElementById("btn");
+
+      button.onclick = function () {
+        rollDice();
+      };
+
+      function rollDice() {
+        let diceSide = Math.floor(Math.random() * 6 + 1);
+        new Audio("music/dice-sound.mp3").play();
+        for (let i = 1; i <= 6; i++) {
+          dice.classList.remove("show-" + i);
+
+          if (diceSide === i) {
+            dice.classList.add("show-" + i);
+          }
+        }
+
+        var currentPlayer = players[0];
+        var remainingMove = 100 - currentPlayer.position;
+        var move = remainingMove < diceSide ? 0 : diceSide;
+
+        console.log(`player ${currentPlayer.id} & diceNumber:- ${diceSide}`);
+        if (currentPlayer.id == 1) {
+          document.getElementById("playerTurn").innerHTML = `Now It's player 2 Turn `;
+        } else {
+          document.getElementById("playerTurn").innerHTML = `Now It's player 1 Turn `;
+        }
+
+        if (currentPlayer.isFirstMove) {
+          if (currentPlayer.id === 1) {
+            if (diceSide === 6) {
+              // currentPlayer.position = 1; // Set player position to 1 if they roll a 6 on their first move
+              // setBox("b_" + currentPlayer.position, currentPlayer.color);
+              currentPlayer.isFirstMove = false;
+            } else {
+              move = 0;
+              players.push(players.shift()); // Skip to the next player if player 1 doesn't roll a 6
+              currentPlayer = players[0]; // Update the currentPlayer after shifting
+              return;
+            }
+          }
+          else if (currentPlayer.id === 2) {
+            if (diceSide === 6) {
+              // currentPlayer.position = 1; // Set player position to 1 if they roll a 6 on their first move
+              // setBox("b_" + currentPlayer.position, currentPlayer.color);
+              currentPlayer.isFirstMove = false;
+            } else {
+              move = 0;
+              players.unshift(players.pop()); // Move player 2 to the beginning of the array if player 2 doesn't roll a 6
+              currentPlayer = players[0]; // Update the currentPlayer after shifting
+              return;
+            }
+          }
+        }
+
+        setTimeout(() => {
+          playerMover(currentPlayer, move);
+        }, 1000);
+      }
+
+      function check(player, data) {
+        if (data.hasOwnProperty(player.position)) {
+          setTimeout(() => {
+            if (player.position > 0) {
+              removeBox("b_" + player.position);
+            }
+
+            player.position = data[player.position];
+            setBox("b_" + player.position, player.color);
+          }, 1000);
+        }
+      }
+      // if the player1 gets 6 in dice infirstmove set the position of player 1 in position=1 and it should not move forfirsttime
+      // if the player2 gets 6 in dice infirstmove set the position of player 2 in position=1 and it should not move forfirsttime
+    </script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main css style */
+.main{
+    /* background-color: rgb(207, 49, 49); */
+    background-image: url('./photos/img1.jpeg');
+    width: 440px;
+    height: 550px;
+    margin: 0 auto;
+}
+
+/* Navigation or header css style */
+.nav{
+    position: relative;
+    /* top: 15px; */
+}
+
+.nav ul{
+    display: flex;
+    padding: 0 30px;
+    /* justify-content: space-between; */
+    align-items: center;
+    height: 45px;
+    list-style-type: none;
+    background-image: url('./photos/img2.jpeg');
+}
+
+.left-li{
+    margin-right: 60px;
+    padding-right: 15px;
+}
+
+.right-li{
+    margin-left: 90px;
+}
+
+.bdr-line{
+    position:relative;
+    top: -15px;
+    color: rgb(136, 72, 72);
+}
+
+/* This is left and right dish name css style */
+
+.items{
+    display: flex;
+    position: relative;
+    top: -42px;
+}
+
+.left{
+    width: 180px;
+    height: 480px;
+    padding-top: 10px;
+    background-image: url('./photos/img3.jpeg');
+}
+
+.left-items, .right-items{
+    list-style-type: none;
+    /* padding-left: 25px; */
+}
+.right-items{
+    border-left: 1.9px dashed rgb(184, 79, 79);
+}
+
+.left-items li{
+    padding: 6px 0 6.95px 25px;
+    color: aliceblue;
+    opacity: 0.7;
+    /* font-size: 12px; */
+}
+.left-items-li-2{
+    background-color: rgb(61, 13, 13);
+}
+.left-items hr{
+    width: 180px;
+    opacity: 0.05;
+}
+
+.right-items li{
+    padding: 10px 0 12.5px 25px;
+    color: white;
+    opacity: 0.9;
+    font-size: 18px;
+}
+.right-items hr{
+    width: 300px;
+    opacity: 0.05;
+}
+
+
+/* from here bottom part css style  */
+.bottom{
+    height: 30px;
+    background-image: url('./photos/img4.jpeg');
+}
+.btm-img{
+    height: 110px;
+    background-image: linear-gradient( transparent, rgba(151, 65, 65, 0.99) 15%);
+    position: relative;
+    top: -130px;
+}
+
+.btm-img p{
+    display: flex;
+    position: relative;
+    top: 74px;
+    left: 212px;
+    z-index: 2;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.btm-img1{
+    position: relative;
+    top: -5px;
+    width: 85px;
+    height: 85px;
+    margin-left: 180px;
+    z-index: 1;
+}
+
+.btm-img2{
+    position: relative;
+    width: 70px;
+    height: 36px;
+    top: -30px;
+    left: 80px;
+}
+
+.bdr-line-btm{
+    position: relative;
+    top: -145px;
+    color: rgb(212, 111, 111);
+}
+
