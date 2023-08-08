@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% load static %}
+	{% block content %}
+	<!-- Header -->
+	<header class="header shop">
+		<div class="middle-inner py-0">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-12">
+						<!-- Logo -->
+						<div class="logo">
+							<a href="{% url 'Home' %}"><img src="{% static 'images/gfg_logo.png' %}" alt="logo"></a>
+						</div>
+					</div>
+					<div class="col-lg-8 col-md-7 col-12">
+						<div class="search-bar-top">
+							<div class="search-bar">
+								<form action="{% url 'search_view' %}" method="get">
+									<input name="search" placeholder="Search Here....." type="search" aria-label="Search">
+									<button class="btnn" type="submit"><i class="ti-search"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3 col-12">
+						<div class="right-bar">
+							<!-- Search Form -->
+							<div class="sinlge-bar">
+								<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+									{% if request.user.is_authenticated %}
+								   <li class="nav-item dropdown mx-2">
+									  <a class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user text-dark"></i>
+										{% comment %} {{request.user}} {% endcomment %}
+									  </a>
+									  <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+										<li><a class="dropdown-item" href="">Profile</a></li>
+										<li><a class="dropdown-item" href="{% url 'myOrders' %}">Orders</a></li>
+										<li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+									  </ul>
+									</li>
+									{% else %}
+									<li class="nav-item dropdown mx-2">
+										<a class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user text-dark"></i>
+										</a>
+										<ul class="dropdown-menu" aria-labelledby="profileDropdown">
+										  <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+										  <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+										</ul>
+									  </li>
+									{% endif %}
+								  </ul>
+							</div>
+							<div class="sinlge-bar shopping">
+                                <a href="{% url 'cart' %}" class="single-icon"><i class="ti-bag"></i> <span class="total-count" id="total-count">0</span></a>
+                            </div>                            
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Start Product Area -->
+    <div class="product-area section">
+            <div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="section-title">
+							<h2>Trending Item</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="product-info">
+							<div class="nav-main">
+								<!-- Tab Nav -->
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#man" role="tab">Mens</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#women" role="tab">Womans</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#kids" role="tab">Kids</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#electronics" role="tab">Electronics</a></li>
+									{% comment %} <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mobiles" role="tab">Mobiles</a></li> {% endcomment %}
+								</ul>
+								<!--/ End Tab Nav -->
+							</div>
+							<div class="tab-content" id="myTabContent">
+								<!-- Start Single Tab -->
+								<!-- men -->
+								<div class="tab-pane fade show active" id="man" role="tabpanel">
+									<div class="tab-single">
+										<div class="row">
+											<h2 class="p-0 mt-2">Men's Fashions</h2>
+											{% for product in products_man %}
+											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="{% url 'productDetail' product.pk %}">
+															<img class="default-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+															<img class="hover-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+														</a>
+														<div class="button-head">
+															<div class="product-action-2">
+																<a title="Add to cart" name="product_id" value="{{product.id}}" id="product_id" href="{% url 'addToCart' %}?product_id={{ product.id }}">Add to cart</a>
+															</div>
+														</div>
+													</div>
+													<div class="product-content">
+														<h3><a href="{% url 'productDetail' product.pk %}">{{ product.name }}</a></h3>
+														<div class="product-price">
+															<span><strong>{{ product.price }}/-</strong></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<!--/ End Single Tab -->
+
+								<!-- Start Single Tab -->
+								<!-- women -->
+								<div class="tab-pane fade show active" id="women" role="tabpanel">
+									<div class="tab-single">
+										<div class="row">
+											<h2 class="p-0 mt-3">Women's Fashions</h2>
+											{% for product in products_women %}
+											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="{% url 'productDetail' product.pk %}">
+															<img class="default-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+															<img class="hover-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+														</a>
+														<div class="button-head">
+															<div class="product-action-2">
+																<a title="Add to cart" name="product_id" value="{{product.id}}" id="product_id" href="{% url 'addToCart' %}?product_id={{ product.id }}">Add to cart</a>
+															</div>
+														</div>
+													</div>
+													<div class="product-content">
+														<h3><a href="{% url 'productDetail' product.pk %}">{{ product.name }}</a></h3>
+														<div class="product-price">
+															<span><strong>{{ product.price }}/-</strong></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<!--/ End Single Tab -->
+
+								<!-- Start Single Tab -->
+								<!-- kids -->
+								<div class="tab-pane fade show active" id="kids" role="tabpanel">
+									<div class="tab-single">
+										<div class="row">
+											<h2 class="p-0 mt-3">Kids Fashions</h2>
+											{% for product in products_kids %}
+											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="{% url 'productDetail' product.pk %}">
+															<img class="default-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+															<img class="hover-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+														</a>
+														<div class="button-head">
+															<div class="product-action-2">
+																<a title="Add to cart" name="product_id" value="{{product.id}}" id="product_id" href="{% url 'addToCart' %}?product_id={{ product.id }}">Add to cart</a>
+															</div>
+														</div>
+													</div>
+													<div class="product-content">
+														<h3><a href="{% url 'productDetail' product.pk %}">{{ product.name }}</a></h3>
+														<div class="product-price">
+															<span><strong>{{ product.price }}/-</strong></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<!--/ End Single Tab -->
+								
+								<!-- Start Single Tab -->
+								<!-- Electronics -->
+								<div class="tab-pane fade show active" id="electronics" role="tabpanel">
+									<div class="tab-single">
+										<div class="row">
+											<h2 class="p-0 mt-3">Electronics Products</h2>
+											{% for product in products_electronics %}
+											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="{% url 'productDetail' product.pk %}">
+															<img class="default-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+															<img class="hover-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+														</a>
+														<div class="button-head">
+															<div class="product-action-2">
+																<a title="Add to cart" name="product_id" value="{{product.id}}" id="product_id" href="{% url 'addToCart' %}?product_id={{ product.id }}">Add to cart</a>
+															</div>
+														</div>
+													</div>
+													<div class="product-content">
+														<h3><a href="{% url 'productDetail' product.pk %}">{{ product.name }}</a></h3>
+														<div class="product-price">
+															<span><strong>{{ product.price }}/-</strong></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<!--/ End Single Tab -->
+								 <!-- mobiles -->
+								{% comment %} <div class="tab-pane fade show active" id="mobiles" role="tabpanel">
+									<div class="tab-single">
+										<div class="row">
+											<h2 class="p-0 mt-2">Branded Mobiles</h2>
+											{% for product in products_mobiles %}
+											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="{% url 'productDetail' product.pk %}">
+															<img class="default-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+															<img class="hover-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+														</a>
+														<div class="button-head">
+															<div class="product-action-2">
+																<a title="Add to cart" name="product_id" value="{{product.id}}" id="product_id" href="{% url 'addToCart' %}?product_id={{ product.id }}">Add to cart</a>
+															</div>
+														</div>
+													</div>
+													<div class="product-content">
+														<h3><a href="{% url 'productDetail' product.pk %}">{{ product.name }}</a></h3>
+														<div class="product-price">
+															<span><strong>{{ product.price }}/-</strong></span>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div> {% endcomment %}
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+    </div>
+	
+	{% endblock content %}

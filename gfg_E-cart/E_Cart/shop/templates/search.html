@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <!-- Breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container-fluid mx-2">
+			<div class="row">
+				<div class="col-12">
+					<div class="bread-inner">
+						<ul class="bread-list">
+							<li><i class="ti-arrow-left"></i><a href="/">Back</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumbs -->
+    <div class="tab-pane fade show m-4">
+        <div class="tab-single">
+            <div class="row">
+                <h2 class="p-0 mt-2 text-secondary">Search Results for: <i class="ti-arrow-right"></i> " {{ search }} "</h2>
+                {% if results %}
+                    {% for product in results %}
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a href="{% url 'productDetail' product.pk %}">
+                                    <img class="default-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    <img class="hover-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                </a>
+                                <div class="button-head">
+                                    <div class="product-action-2">
+                                        <a title="Add to cart" name="product_id" value="{{product.id}}" id="product_id" href="{% url 'addToCart' %}?product_id={{ product.id }}">Add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <h3><a href="{% url 'productDetail' product.pk %}">{{ product.name }}</a></h3>
+                                <div class="product-price">
+                                    <span><strong>{{ product.price }}/-</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h2 class="text-center m-3">No results found...</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
