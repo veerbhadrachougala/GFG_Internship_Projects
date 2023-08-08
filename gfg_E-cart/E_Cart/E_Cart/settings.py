@@ -77,11 +77,6 @@ WSGI_APPLICATION = 'E_Cart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'veerdb',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': 3306
     }
 }
 
