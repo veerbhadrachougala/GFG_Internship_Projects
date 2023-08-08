@@ -1,0 +1,38 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore local development settings
+settings.py
+
+# Ignore media and static files
+media/
+
+# Ignore database files
+*.sqlite3
+
+# Ignore sensitive or environment-specific files
+*.env
+*.ini
+*.log
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore compiled JavaScript and CSS files
+*.js.map
+*.css.map
+
+# Ignore compiled files from build tools
+node_modules/
+dist/
+project_env/
+E_Cart/shop/migrations/
+E_Cart/media/
+
+# Ignore system files
+.DS_Store
+Thumbs.db

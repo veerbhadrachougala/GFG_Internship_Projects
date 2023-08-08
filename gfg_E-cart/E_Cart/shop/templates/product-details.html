@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ products.name }} | E_Cart{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+	<div class="row">
+	 <div class="col-sm-6 text-center align-self-center">
+	  <img src="{{products.image.url}}" alt="" class="img-fluid img-thumbnail" width="250" height="250">
+	 </div>
+	 <div class="col-sm-5 offset-sm-1">
+	  <h3>Product Title<i class="fa-solid fa-angles-right"></i> <span class="text-danger">{{products.name}}</span></h3>
+	  <hr>
+	  <p>{{products.description}}</p> <br>
+	  <h5>Rs {{products.price}}/-</h5> <br>
+	  {% comment %} <h4>Rs {{products.price}} <small class="fw-light text-decoration-line-through">{{products.price}}</small></h4> <br> {% endcomment %}
+	  
+	  {% if item_already_in_cart %}
+	  <a href="{% url 'cart' %}" class="btn" style="color: #fff;">Go to cart</a>
+  	  {% else %}
+	  <a title="Add to cart" class="btn"style="color: #fff;" href="{% url 'addToCart' %}?product_id={{ products.pk }}">Add to cart</a>
+  	  {% endif %}
+	 
+	  <h5 class="mt-5 text-success">(<i class="fa-solid fa-award"></i>) Available Offers</h5>
+	  <ul class="text-danger">
+	   <li>(<i class="fa-solid fa-star"></i>) Shipping Charges 0/- for above 1000/- Purchase.</li>
+	   <li>(<i class="fa-solid fa-star"></i>) 20% Off on Purchase Over 2000/-.</li>
+	   <li>(<i class="fa-solid fa-star"></i>) Coupons Are Available.</li>
+	  </ul>
+	 </div>
+	</div>
+   </div>
+{% endblock content %}
