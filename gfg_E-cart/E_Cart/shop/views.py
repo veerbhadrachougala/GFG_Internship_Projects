@@ -58,10 +58,10 @@ def Register(request):
         if confirmpassword != password:
             return HttpResponse("Your Password and Confirm Password are not matching")
         else:
-            # Check if a user with the given email already exists
+            # Check if a user with the given phonenumber already exists
             existing_user = User.objects.filter(username=phone).first()
             if existing_user:
-                return HttpResponse("An account with this email already exists.")
+                return redirect('login')
 
             # Create a new user instance
             new_user = User.objects.create_user(phone, email, password)
