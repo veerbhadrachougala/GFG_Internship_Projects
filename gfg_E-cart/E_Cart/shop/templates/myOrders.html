@@ -29,7 +29,7 @@
           <p> product:<span class="fw-bold px-2">{{orders.product.name}}</span></p>
           <p> Quantity:{{orders.product.quantity}}</p>
           <p> price:<span class="fw-bold px-2">{{orders.product.price}}/- Rupee</span></p>
-          {% if orders.status not in 'Delivered canceled' %}
+          {% if orders.status not in 'Delivered Canceled' %}
             <a href="{% url 'cancel_order' orders.id %}" class="btn p-2 " dissable>Cancel Order</a>
           {% endif %}
        </div>

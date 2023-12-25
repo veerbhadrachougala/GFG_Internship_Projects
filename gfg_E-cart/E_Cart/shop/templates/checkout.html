@@ -128,13 +128,13 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="form-group">
+								{% if  Totalamount >= 2000 %}
 								<label>Coupon Code<span>*</span></label>
 								<form id="apply-coupon-form">
 									{% csrf_token %}
 									<input type="text" id="coupon_code" name="coupon_code" placeholder="Enter coupon code">
 									<button type="submit" class="btn p-2">Apply</button>
 								</form>
-								{% if  Totalamount >= 2000 %}
 								<h6 class="mt-2 text-danger"><span class="blink"><i class="fa-solid fa-award"></i></span>) Apply Coupon to get more Discount</h6>
 								{% endif %}
 							</div>

@@ -18,7 +18,6 @@ def productList(request):
     products_women = Product.objects.filter(category='women')
     products_kids = Product.objects.filter(category='kids')
     products_electronics = Product.objects.filter(category='electronics')
-    # products_mobiles = Product.objects.filter(category='mobiles')
     
     context = {
         'products_man': products_man,
@@ -58,16 +57,13 @@ def Register(request):
         if confirmpassword != password:
             return HttpResponse("Your Password and Confirm Password are not matching")
         else:
-            # Check if a user with the given phonenumber already exists
             existing_user = User.objects.filter(username=phone).first()
             if existing_user:
                 return redirect('login')
 
-            # Create a new user instance
             new_user = User.objects.create_user(phone, email, password)
             new_user.save()
 
-            # Create a Customer associated with the new user
             my_user = Customer.objects.create(User=new_user, phone=phone, email=email)
             my_user.save()
 
@@ -102,20 +98,15 @@ def addToCart(request):
         product_id = request.GET.get('product_id')
         product_instance = Product.objects.get(pk=product_id)
 
-        # Check if the user is authenticated (logged in)
         if request.user.is_authenticated:
-            # Get the user associated with the request
             user = request.user
 
-            # Check if the user already has the same product in their cart
             existing_cart_item = Cart.objects.filter(user=user, product=product_instance).first()
 
             if existing_cart_item:
-                # If the product is already in the cart, increase the quantity
                 existing_cart_item.quantity += 1
                 existing_cart_item.save()
             else:
-                # If the product is not in the cart, create a new cart item
                 new_cart_item = Cart(user=user, product=product_instance)
                 new_cart_item.save()
 
@@ -138,14 +129,12 @@ def cart(request):
                 temp_amount = cart_item.quantity * cart_item.product.price
                 amount += temp_amount
 
-            # apply delivery charge based on the total amount
             if amount < 1000:
                 delivery_charge = Decimal('50.0')
             elif amount >= 1000:
                 delivery_charge = Decimal('0.0')
 
             total_amount = amount + delivery_charge
-            # Apply 20% discount on total_amount if it is over 2000
             if total_amount >= 2000:
                 discount = total_amount * Decimal('0.2') # 20% == (0.2)
                 total_amount -= discount
@@ -174,9 +163,10 @@ def cartTotalQuantity(request):
 
 # -------------To increase the item quantity in cart -----------------#
 
-def plusCart(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
+def plusCart(request,product_id):
+    # if request.method == 'POST':
+    #     product_id = request.POST.get('product_id')
+        print(product_id)
         try:
             cart_item = Cart.objects.get(product_id=product_id, user=request.user)
         except ObjectDoesNotExist:
@@ -194,32 +184,33 @@ def plusCart(request):
             temp_amount = p.quantity * p.product.price
             amount += Decimal(temp_amount)  
 
-        # apply offers based on the total amount
         if amount < 1000:
             delivery_charge = Decimal('50.0')
         elif amount >= 1000:
             delivery_charge = Decimal('0.0')
 
         total_amount = amount + delivery_charge
-        # Apply 20% discount on total_amount if it is over 2000
         if total_amount >= 2000:
             discount = total_amount * Decimal('0.2') # 20% == (0.2)
             total_amount -= discount
 
         data = {
-            'quantity': cart_item.quantity,
             'amount': amount,
-            'totalamount': total_amount
+            'delivery_charge': delivery_charge,
+            'Discount':discount,
+            'totalamount': total_amount,
+            'carts': cart_products
         }
 
-        return JsonResponse(data)
+        return render(request, 'cart.html', data)
     
 
 # -------------To decrease the item quantity in cart -----------------#
 
-def minusCart(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
+def minusCart(request, product_id):
+    # if request.method == 'POST':
+    #     product_id = request.POST.get('product_id')
+        print(product_id)
         c = Cart.objects.get(Q(product=product_id) & Q(user=request.user))
         c.quantity -= 1
         c.save()
@@ -232,32 +223,33 @@ def minusCart(request):
         for p in cart_products:
             temp_amount = p.quantity * p.product.price
             amount += Decimal(temp_amount)  
-        # apply offers based on the total amount
+
         if amount < 1000:
             delivery_charge = Decimal('50.0')
         elif amount >= 1000:
             delivery_charge = Decimal('0.0')
 
         total_amount = amount + delivery_charge
-        # Apply 20% discount on total_amount if it is over 2000
         if total_amount >= 2000:
             discount = total_amount * Decimal('0.2') # 20% == (0.2)
             total_amount -= discount
 
         data = {
-            'quantity': c.quantity,
             'amount': amount,
-            'totalamount': total_amount
+            'delivery_charge': delivery_charge,
+            'Discount':discount,
+            'totalamount': total_amount,
+            'carts': cart_products
         }
 
-        return JsonResponse(data)
+        return render(request, 'cart.html', data)
 
 
 # -------------To Remove the particular item in cart -----------------#
 
-def removeCart(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id') 
+def removeCart(request, product_id):
+    # if request.method == 'POST':
+    #     product_id = request.POST.get('product_id') 
         c = Cart.objects.get(Q(product=product_id) & Q(user=request.user))
         c.delete()
 
@@ -269,23 +261,26 @@ def removeCart(request):
         for p in cart_products:
             temp_amount = p.quantity * p.product.price
             amount += Decimal(temp_amount)  
-        # pply offers based on the total amount
+
         if amount < 1000:
             delivery_charge = Decimal('50.0')
         elif amount >= 1000:
             delivery_charge = Decimal('0.0')
 
         total_amount = amount + delivery_charge
-        # Apply 20% discount on total_amount if it is over 2000
+
         if total_amount >= 2000:
             discount = total_amount * Decimal('0.2') # 20% == (0.2)
             total_amount -= discount
 
         data = {
             'amount': amount,
-            'totalamount': total_amount
+            'delivery_charge': delivery_charge,
+            'Discount':discount,
+            'totalamount': total_amount,
+            'carts': cart_products
         }
-        return JsonResponse(data)
+        return render(request, 'cart.html', data)
 
 
 # -------------Checkout Page to place the order || Getting the data from the checkout form storing that data into ordrePlaced model -----------------#
@@ -306,7 +301,7 @@ def apply_coupon(request):
         for cp in cart_items:
             temp_amount = (cp.quantity * cp.product.price)
             amount += Decimal(temp_amount)      
-        # Apply delivery charge based on the total amount
+
         if amount < 1000:
             delivery_charge = Decimal('50.0')   
         else:
@@ -314,13 +309,12 @@ def apply_coupon(request):
 
         total_amount = amount + delivery_charge
 
-        # Apply 20% discount on total_amount if it is over 2000
         if total_amount >= 2000:
             discount = total_amount * Decimal('0.2')
             print(discount,'discvbbnnmm')
             total_amount -= discount
             print(total_amount)
-        # Get the coupon code from the AJAX POST data
+
         coupon = Coupon.objects.get(code=coupon_code)
         print(coupon)
         # if coupon == coupon_code:
@@ -363,7 +357,7 @@ def checkout(request):
     for cp in cart_items:
         temp_amount = (cp.quantity * cp.product.price)
         amount += Decimal(temp_amount)      
-    # Apply offers based on the total amount
+
     if amount < 1000:
         delivery_charge = Decimal('50.0')   
     else:
@@ -371,7 +365,7 @@ def checkout(request):
 
     total_amount = amount + delivery_charge
 
-    # Apply 20% discount on total_amount if it is over 2000
+
     if total_amount >= 2000:
         discount = total_amount * Decimal('0.2')
         total_amount -= discount
@@ -397,11 +391,10 @@ def checkout(request):
         amount = int('0')
         delivery_charge = int('0')
 
-        # Loop through each cart item and create an Orderedplaced object for each item
         for cart_item in cart_items:
             temp_amount = (cart_item.quantity * cart_item.product.price)
             amount += int(temp_amount)
-            # Apply delivery Charge based on the total amount
+
             if amount < 1000:
                 delivery_charge = int('50')
                 amount = amount + delivery_charge
@@ -410,12 +403,12 @@ def checkout(request):
 
             total_amount = amount + delivery_charge
 
-            # Apply 20% discount on amount if it is over 2000
+
             if total_amount >= 2000:
                 discount = amount * Decimal('0.2') # 20% == (0.2)
                 amount = amount - int(discount)
 
-            # Saving the order for each cart item
+            # Saving the order
             Orderedplaced.objects.create(
                 User=user,
                 product=cart_item.product,
@@ -431,7 +424,7 @@ def checkout(request):
                 amount=amount
             )
 
-        # Delete cart items after all orders are placed
+        # Delete cart
         cart_items.delete()
         return redirect('myOrders')
 
@@ -453,7 +446,6 @@ def search_view(request):
     results = None
 
     if search:
-        # Perform the search query using the product model 
         results = Product.objects.filter( Q(name__icontains = search) |  Q(category__icontains = search) ) # Search by product name or category 
 
 
@@ -469,9 +461,7 @@ def cancel_order(request, order_id):
     try:
         order = Orderedplaced.objects.get(pk=order_id)
 
-        # Check if the order status is not 'Delivered'
         if order.status != 'Delivered':
-            # Update the order status to 'cancel'
             order.status = 'Canceled'
             order.save()
 
