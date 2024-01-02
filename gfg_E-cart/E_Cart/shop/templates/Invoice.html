@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice</title>
+  <style>
+    .table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .th, .td {
+      border: 1px solid black;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ddd;
+      padding-top: 5px;
+    }
+    .m{
+        margin: 5px 0;
+    }
+    .m-0{
+        margin: 0;
+    }
+    .p-0{
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-bottom: 0;
+    }
+    .f-13{
+      font-size: 13px;
+    }
+    .f-10{
+      font-size: 10px;
+    }
+    .f-14{
+      font-size: 14px;
+    }
+    .f-12{
+      font-size: 12px;
+    }
+    .tx-al{
+      text-align: center;
+    }
+    .fw{
+      font-weight: bold;
+    }
+    .mp-0{
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+    <div>
+      <table style="border: none;">
+        <tr>
+          <td></td>
+          <td><h2 style="font-size: 25px; padding: 0; margin-top: 0;">TAX INVOICE</h2></td>
+          <td><h5 style="text-align: right; vertical-align: top; color: red; padding: 0;">ORIGINAL FOR BUYER</h5></td>
+        </tr>
+      </table>
+
+
+      <div style="border-bottom: 1px solid grey;">
+        <table>
+          <tr>
+            <td style="width: 75%">
+              <h2 style="margin:0; font-size: 20px;">Shri Dutta Pvt Ltd (Assam)</h2>
+              <p  class="f-13 mp-0">K P Patta 32, Dag No 72 80 81, Mouze Chayani, KRISHNA INCENSE, Solesala, Bongara,Kampur,Assam,781015...K P Patta 32, Dag No 72 80 81,</p>
+              <p class="f-13 mp-0">Ph.No: 8884072913, FAX : 121212</p>
+              <p class="f-13 fw mp-0">GSTIN NO: 29ASDFGHJKLO1Z1, PAN No: ASDFGHJKLO, FSSAI: 1001902200866512,<br /> MSMEI: 1001902200866512</p>
+              <p class="f-13 mp-0">Invoice No: <span class="fw">GFGINVOICENO1234</span>, Invoice Date: <span class="fw">13/12/2020</span>, PO No: 123456, LR No: QWRETTEEY12355</p>
+            </td>
+            <td style=" text-align: center;" class="mp-0">
+              <img src="http://127.0.0.1:8000/static/images/gfg_logo.png" alt="Institute Logo"style="max-width: 100px; max-height: 100px;">
+            </td>
+          </tr>
+        </table>
+      </div>
+      
+
+      <div style="padding-top: 5px; padding-left: 5px;">
+        <table >
+          <tr>
+            <td style="border-right: 1px solid grey;">
+              <p class=" f-14 mp-0">Name & Address of Receiver(Billed To) :</p>
+              <p class=" f-14 fw mp-0">Britania Industries Limited...Britania Industries Limited...Britania Industries Limited..</p>
+              <p class=" f-14 mp-0">Rampur, kampur...Rampur, kampur...Rampur, kampur....Rampur, kampur.....Rampur, kampur.....Rampur, kampur</p>
+              <p class=" f-14 mp-0">Rampur, Palasbari-560001....Rampur, Palasbari-560001</p>
+              <p class=" f-14 mp-0">GSTIN No: 37ABCSDGAHSFAH</p>
+              <p class=" f-14 mp-0">State: Karnataka, State Code: 18</p>
+            </td>
+            <td>
+              <p class=" f-14 mp-0">Name & Address of Receiver(Shipped To) :</p>
+              <p class=" f-14 fw mp-0">Britania Industries Limited...Britania Industries Limited...Britania Industries Limited..</p>
+              <p class=" f-14 mp-0">Rampur, kampur...Rampur, kampur...Rampur, kampur....Rampur, kampur.....Rampur, kampur.....Rampur, kampur</p>
+              <p class=" f-14 mp-0">Rampur, Palasbari-560001....Rampur, Palasbari-560001</p>
+              <p class=" f-14 mp-0">GSTIN No: 37ABCSDGAHSFAH</p>
+              <p class=" f-14 mp-0">State: Karnataka, State Code: 18</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th style="width: 5%;" class=" f-12 tx-al th">Sl No</th>
+                      <th style="width: 50%;" class=" f-12 tx-al th">Description of Goods</th>
+                      <th style="width: 10%;" class=" f-12 tx-al th">HSN/SAC Code</th>
+                      <th style="width: 10%;" class=" f-12 tx-al th">Qty / UOM</th>
+                      <th style="width: 10%;" class=" f-12 tx-al th">Rate (INR)</th>
+                      <th style="width: 15%;" class=" f-12 tx-al th">Value</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td style="width: 5%;" class="p-0 f-12 tx-al td">1</td>
+                      <td style="width: 50%;" class="p-0 f-12 td">Suagar Jaranadeshwar- S2-30, Order No:6464 & Date: 13/12/2022..Suagar Jaranadeshwar- S2-30, Order No:6464 & Date: 13/12/2022</td>
+                      <td style="width: 10%;" class="p-0 f-12 tx-al td">17011490</td>
+                      <td style="width: 10%;" class="p-0 f-12 tx-al td">240.00 QTL</td>
+                      <td style="width: 10%;" class="p-0 f-12 tx-al td">4195.00</td>
+                      <td style="width: 15%;" class="p-0 f-12 td">Rs: 10006888.00</td> 
+                  </tr>
+                  <tr>
+                      <td colspan="3" class="p-0 f-12 td">Mode of Transport: <span class="fw">By Road</span></td>
+                      <td colspan="2" class="p-0 f-12 td">Taxable Value</td>
+                      <td class="p-0 f-12 td">Rs: 10006374.10</td>
+                  </tr>
+                  <tr>
+                      <td colspan="3" class="p-0 f-12 td">Vehicle Number: <span class="fw">KA23ER4036</span></td>
+                      <td colspan="2" class="p-0 f-12 td">Total SGST(2.5%)</td>
+                      <td class="p-0 f-12 td">Rs: 124555.00</td>
+                  </tr>
+                  <tr>
+                      <td colspan="3" class="p-0 f-12 td">Date & Time of Supply: <span class="fw">13/12/2023, 12:41 PM</span></td>
+                      <td colspan="2" class="p-0 f-12 td">Total CGST(2.5%)</td>
+                      <td class="p-0 f-12 td">Rs: 124555.00</td>
+                  </tr>
+                  <tr>
+                      <td class="p-0 f-12 td" colspan="3" rowspan="2">Amount of GST in words: <span class="fw">Fifty Thousand, Three Hundred And Forty Rupees Only..Fifty Thousand, Three Hundred And Forty Rupees Only</span></td>
+                      <td class="p-0 f-12 td" colspan="2">Total IGST(5%)</td>
+                      <td class="p-0 f-12 td">Rs: 124555.00</td>
+                  </tr>
+                  <tr>
+                      <td class="p-0 f-12 td" colspan="2">Total GST</td>
+                      <td class="p-0 f-12 td">Rs: 5244555.00</td>
+                  </tr>
+                  <tr>
+                      <td class="p-0 f-12 td" colspan="3" rowspan="2">Total Invoice Amount in words: <span class="fw">SeventyFive Lakh, Fifty Thousand, Three Hundred And Forty Rupees Only</span></td>
+                      <td class="p-0 f-12 td" colspan="2">Others If any</td>
+                      <td class="p-0 f-12 td">Rs.0000000</td>
+                  </tr>
+                  <tr>
+                      <td class="p-0 f-12 fw td" colspan="2">Invoice Amount</td>
+                      <td class="p-0 f-12 fw td" >Rs: 99999999.00</td>
+                  </tr>
+                  <tr>
+                      <td class="p-0 f-12 td" colspan="3">
+                          <p class="m-0 f-12"><span class="fw">IRN :</span> <span class="m-0  f-10">f628bjkwe634bj48dfnfv849wnt4e58ugfng84tn5trgyfvgn588tddfvfyg98eryytn5lth..fvgn588tddfvf</span></p>
+                          <p class="m-0 f-12"><span class="fw">ACK No :</span> <span class="m-0  f-12">18334266787cbb53g38</span></p>
+                          <p class="m-0 f-12"><span class="fw">ACK Date :</span> <span class="m-0  f-12">13-12-2023 12.41 PM</span></p>
+                      </td>
+                      <td class="p-0 f-12 td" colspan="3">
+                          <p class="m-0  f-12"><span class="fw">E-way Bill No :</span> <span class="m-0  f-12">885567244681555</span></p>
+                          <p class="m-0 f-12"><span class="fw">E-way Date :</span> <span class="m-0  f-12">13-12-2023 12:41 PM</span></p>
+                          <p class="m-0 f-12"><span class="fw">E-way Valid till :</span> <span class="m-0  f-12">14-12-2023 11:59 PM</span></p>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <div >
+          <p class="fw-10 m" >Certified that the particulars given above are true and correct and the amount indicated represents are actually charged that there
+              is no flow of additional consideration directly or indirectly from the buyer. This is system generated invoice</p>
+      </div>
+      <table style="text-align: center;">
+        <tr>
+          <td style="width: 30%;">
+            <img src=" http://127.0.0.1:8000/static/images/R.png" style="max-width: 200px; max-height: 200px;" alt="Invoice QR Code">
+          </td>
+          <td style="width: 30%; height: 150px;">
+
+          </td>
+          <td style="width: 30%;">
+            <h5>For SHRI DUTT INDIA PVT LTD(ASSAM)</h5>
+            <img src=" http://127.0.0.1:8000/static/images/signatures-download-clipart-29.png" style="max-width: 100px; max-height: 100px;" alt="Authorizer Sign">
+            <p class="fw">Authorised signatory</p>
+          </td>
+        </tr>
+      </table>
+      <div>
+          <p style="text-align: center; margin-top: 8px ;" class="fw">All disputes are subject to Bangalore North Jurisdiction Only</p>
+      </div>
+  </div>
+</body>
+</html>

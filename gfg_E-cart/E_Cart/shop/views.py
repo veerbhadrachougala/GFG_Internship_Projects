@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
+from xhtml2pdf import pisa
+
 # -------------All Product Lists-----------------#
 
 def productList(request):
@@ -471,7 +473,30 @@ def cancel_order(request, order_id):
     return redirect('myOrders')            
 
 
+def render_to_pdf(template_path, context_dict):
+    template = render(None, template_path, context_dict)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="Invoice.pdf"'
 
+    # Creating PDF
+    pisa_status = pisa.CreatePDF(
+        template.getvalue(),
+        dest=response
+    )
+
+    if pisa_status.err:
+        return HttpResponse('We had some errors with code %s <pre>%s</pre>' % (pisa_status.err, html))
+
+    return response
+
+def generate_pdf(request):
+    # Define your template path and context data
+    template_path = 'Invoice.html'
+    context = {
+        # Add your context data here if needed
+    }
+    # Generate and return the PDF response
+    return render_to_pdf(template_path, context)
     
 
 

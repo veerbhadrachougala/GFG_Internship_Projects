@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import generate_pdf
 urlpatterns = [
     path('', views.productList, name="Home"),
     path('add_to_cart/', views.addToCart, name='addToCart'),
@@ -18,5 +19,5 @@ urlpatterns = [
     path('checkout/', views.checkout, name="checkout"),
     path('apply_coupon/', views.apply_coupon, name='apply_coupon'),
 
-
+    path('generate-pdf/', generate_pdf, name='generate_pdf'),
 ]
